@@ -1,0 +1,63 @@
+{
+    "name": "TypeMetaGroupe",
+    "fields": [
+        {
+            "fieldName": "typeDuGroupe",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "100"
+        },
+        {
+            "fieldName": "iconeFa",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "200"
+        },
+        {
+            "fieldName": "detail",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "ordreMail",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "lienDocMetaGroupe",
+            "otherEntityRelationshipName": "type",
+            "relationshipName": "defaultDocs"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "metaGroupe",
+            "otherEntityRelationshipName": "type",
+            "relationshipName": "groupes"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "reseau",
+            "otherEntityRelationshipName": "types",
+            "relationshipName": "reseau",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200214120100",
+    "entityTableName": "type_meta_groupe",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}

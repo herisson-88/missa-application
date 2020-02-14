@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="partageMetaGroupe">
+            <h2><span>Partage Meta Groupe</span> {{ partageMetaGroupe.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Validated</span></dt>
+                <dd>
+                    <span>{{ partageMetaGroupe.validated }}</span>
+                </dd>
+                <dt><span>Date Validation</span></dt>
+                <dd>
+                    <span>{{ partageMetaGroupe.dateValidation }}</span>
+                </dd>
+                <dt><span>Detail</span></dt>
+                <dd>
+                    <span>{{ partageMetaGroupe.detail }}</span>
+                </dd>
+                <dt><span>Meta Groupe Partage</span></dt>
+                <dd>
+                    <div *ngIf="partageMetaGroupe.metaGroupePartageId">
+                        <a [routerLink]="['/meta-groupe', partageMetaGroupe.metaGroupePartageId, 'view']">{{ partageMetaGroupe.metaGroupePartageNom }}</a>
+                    </div>
+                </dd>
+                <dt><span>Meta Groupe Destinataires</span></dt>
+                <dd>
+                    <div *ngIf="partageMetaGroupe.metaGroupeDestinatairesId">
+                        <a [routerLink]="['/meta-groupe', partageMetaGroupe.metaGroupeDestinatairesId, 'view']">{{ partageMetaGroupe.metaGroupeDestinatairesNom }}</a>
+                    </div>
+                </dd>
+                <dt><span>Auteur Partage</span></dt>
+                <dd>
+                    <div *ngIf="partageMetaGroupe.auteurPartageId">
+                        <a [routerLink]="['/missa-user', partageMetaGroupe.auteurPartageId, 'view']">{{ partageMetaGroupe.auteurPartageId }}</a>
+                    </div>
+                </dd>
+                <dt><span>Validateur Du Partage</span></dt>
+                <dd>
+                    <div *ngIf="partageMetaGroupe.validateurDuPartageId">
+                        <a [routerLink]="['/missa-user', partageMetaGroupe.validateurDuPartageId, 'view']">{{ partageMetaGroupe.validateurDuPartageId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/partage-meta-groupe', partageMetaGroupe.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

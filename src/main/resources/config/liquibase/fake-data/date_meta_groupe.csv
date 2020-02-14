@@ -1,0 +1,11 @@
+id;date_debut;date_fin;every;hour;minutes;detail
+1;2020-02-13T20:29:03;2020-02-13T22:09:26;SAMEDI;35674;8896;../fake-data/blob/hipster.txt
+2;2020-02-13T13:23:18;2020-02-14T04:19:11;VENDREDI;73310;95382;../fake-data/blob/hipster.txt
+3;2020-02-13T13:13:30;2020-02-13T21:06:57;MARDI;5596;94059;../fake-data/blob/hipster.txt
+4;2020-02-14T04:35:34;2020-02-14T03:54:07;SAMEDI;25143;37811;../fake-data/blob/hipster.txt
+5;2020-02-14T01:58:26;2020-02-14T11:58:50;MARDI;46486;87199;../fake-data/blob/hipster.txt
+6;2020-02-14T10:00:14;2020-02-14T04:01:06;JEUDI;94039;56183;../fake-data/blob/hipster.txt
+7;2020-02-14T00:51:50;2020-02-14T06:18:27;JEUDI;69269;3587;../fake-data/blob/hipster.txt
+8;2020-02-13T18:03:15;2020-02-13T14:35:51;JEUDI;23532;17542;../fake-data/blob/hipster.txt
+9;2020-02-14T08:07:10;2020-02-13T14:39:27;MERCREDI;76181;64068;../fake-data/blob/hipster.txt
+10;2020-02-14T02:50:27;2020-02-13T13:08:05;SAMEDI;44480;15949;../fake-data/blob/hipster.txt

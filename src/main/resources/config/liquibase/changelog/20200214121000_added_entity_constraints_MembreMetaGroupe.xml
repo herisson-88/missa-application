@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity MembreMetaGroupe.
+    -->
+    <changeSet id="20200214121000-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="groupe_membre_id"
+                                 baseTableName="membre_meta_groupe"
+                                 constraintName="fk_membre_meta_groupe_groupe_membre_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meta_groupe"/>
+
+        <addForeignKeyConstraint baseColumnNames="valide_par_id"
+                                 baseTableName="membre_meta_groupe"
+                                 constraintName="fk_membre_meta_groupe_valide_par_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="missa_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="missa_user_id"
+                                 baseTableName="membre_meta_groupe"
+                                 constraintName="fk_membre_meta_groupe_missa_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="missa_user"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="typeMetaGroupe">
+            <h2><span>Type Meta Groupe</span> {{ typeMetaGroupe.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Type Du Groupe</span></dt>
+                <dd>
+                    <span>{{ typeMetaGroupe.typeDuGroupe }}</span>
+                </dd>
+                <dt><span>Icone Fa</span></dt>
+                <dd>
+                    <span>{{ typeMetaGroupe.iconeFa }}</span>
+                </dd>
+                <dt><span>Detail</span></dt>
+                <dd>
+                    <span>{{ typeMetaGroupe.detail }}</span>
+                </dd>
+                <dt><span>Ordre Mail</span></dt>
+                <dd>
+                    <span>{{ typeMetaGroupe.ordreMail }}</span>
+                </dd>
+                <dt><span>Reseau</span></dt>
+                <dd>
+                    <div *ngIf="typeMetaGroupe.reseauId">
+                        <a [routerLink]="['/reseau', typeMetaGroupe.reseauId, 'view']">{{ typeMetaGroupe.reseauId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/type-meta-groupe', typeMetaGroupe.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

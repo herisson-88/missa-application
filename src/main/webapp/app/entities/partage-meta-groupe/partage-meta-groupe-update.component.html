@@ -1,0 +1,77 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-partage-meta-groupe-heading">Create or edit a Partage Meta Groupe</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_validated">Validated</label>
+                    <input type="checkbox" class="form-control" name="validated" id="field_validated"
+                           formControlName="validated"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateValidation">Date Validation</label>
+                    <div class="d-flex">
+                        <input id="field_dateValidation" type="datetime-local" class="form-control" name="dateValidation" formControlName="dateValidation" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_detail">Detail</label>
+                    <textarea class="form-control" name="detail" id="field_detail"
+                              formControlName="detail"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_metaGroupePartage">Meta Groupe Partage</label>
+                    <select class="form-control" id="field_metaGroupePartage" name="metaGroupePartage" formControlName="metaGroupePartageId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="metaGroupeOption.id" *ngFor="let metaGroupeOption of metagroupes; trackBy: trackById">{{ metaGroupeOption.nom }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_metaGroupeDestinataires">Meta Groupe Destinataires</label>
+                    <select class="form-control" id="field_metaGroupeDestinataires" name="metaGroupeDestinataires" formControlName="metaGroupeDestinatairesId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="metaGroupeOption.id" *ngFor="let metaGroupeOption of metagroupes; trackBy: trackById">{{ metaGroupeOption.nom }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_auteurPartage">Auteur Partage</label>
+                    <select class="form-control" id="field_auteurPartage" name="auteurPartage" formControlName="auteurPartageId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="missaUserOption.id" *ngFor="let missaUserOption of missausers; trackBy: trackById">{{ missaUserOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_validateurDuPartage">Validateur Du Partage</label>
+                    <select class="form-control" id="field_validateurDuPartage" name="validateurDuPartage" formControlName="validateurDuPartageId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="missaUserOption.id" *ngFor="let missaUserOption of missausers; trackBy: trackById">{{ missaUserOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-envoi-de-mail-heading">Create or edit a Envoi De Mail</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateEnvoi">Date Envoi</label>
+                    <div class="d-flex">
+                        <input id="field_dateEnvoi" type="datetime-local" class="form-control" name="dateEnvoi" formControlName="dateEnvoi" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('dateEnvoi')!.invalid && (editForm.get('dateEnvoi')!.dirty || editForm.get('dateEnvoi')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('dateEnvoi')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('dateEnvoi')?.errors?.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_titre">Titre</label>
+                    <input type="text" class="form-control" name="titre" id="field_titre"
+                           formControlName="titre"/>
+                    <div *ngIf="editForm.get('titre')!.invalid && (editForm.get('titre')!.dirty || editForm.get('titre')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('titre')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('titre')?.errors?.maxlength">
+                        This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_adresseMail">Adresse Mail</label>
+                    <textarea class="form-control" name="adresseMail" id="field_adresseMail"
+                              formControlName="adresseMail"></textarea>
+                    <div *ngIf="editForm.get('adresseMail')!.invalid && (editForm.get('adresseMail')!.dirty || editForm.get('adresseMail')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('adresseMail')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_motSpirituel">Mot Spirituel</label>
+                    <textarea class="form-control" name="motSpirituel" id="field_motSpirituel"
+                              formControlName="motSpirituel"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_conseilTechnique">Conseil Technique</label>
+                    <textarea class="form-control" name="conseilTechnique" id="field_conseilTechnique"
+                              formControlName="conseilTechnique"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nbDestinataire">Nb Destinataire</label>
+                    <input type="number" class="form-control" name="nbDestinataire" id="field_nbDestinataire"
+                           formControlName="nbDestinataire"/>
+                    <div *ngIf="editForm.get('nbDestinataire')!.invalid && (editForm.get('nbDestinataire')!.dirty || editForm.get('nbDestinataire')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nbDestinataire')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('nbDestinataire')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_sended">Sended</label>
+                    <input type="checkbox" class="form-control" name="sended" id="field_sended"
+                           formControlName="sended"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="field_groupePartageParMails">Groupe Partage Par Mail</label>
+                    <select class="form-control" id="field_groupePartageParMails" multiple name="groupePartageParMails" formControlName="groupePartageParMails">
+                        <option [ngValue]="getSelected(editForm.get('groupePartageParMails')!.value, metaGroupeOption)" *ngFor="let metaGroupeOption of metagroupes; trackBy: trackById">{{ metaGroupeOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_admin">Admin</label>
+                    <select class="form-control" id="field_admin" name="admin" formControlName="adminId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="missaUserOption.id" *ngFor="let missaUserOption of missausers; trackBy: trackById">{{ missaUserOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_groupeDuMail">Groupe Du Mail</label>
+                    <select class="form-control" id="field_groupeDuMail" name="groupeDuMail" formControlName="groupeDuMailId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="metaGroupeOption.id" *ngFor="let metaGroupeOption of metagroupes; trackBy: trackById">{{ metaGroupeOption.nom }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

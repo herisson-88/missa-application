@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity PartageMetaGroupe.
+    -->
+    <changeSet id="20200214120400-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="meta_groupe_partage_id"
+                                 baseTableName="partage_meta_groupe"
+                                 constraintName="fk_partage_meta_groupe_meta_groupe_partage_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meta_groupe"/>
+
+        <addForeignKeyConstraint baseColumnNames="meta_groupe_destinataires_id"
+                                 baseTableName="partage_meta_groupe"
+                                 constraintName="fk_partage_meta_groupe_meta_groupe_destinataires_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meta_groupe"/>
+
+        <addForeignKeyConstraint baseColumnNames="auteur_partage_id"
+                                 baseTableName="partage_meta_groupe"
+                                 constraintName="fk_partage_meta_groupe_auteur_partage_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="missa_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="validateur_du_partage_id"
+                                 baseTableName="partage_meta_groupe"
+                                 constraintName="fk_partage_meta_groupe_validateur_du_partage_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="missa_user"/>
+
+    </changeSet>
+</databaseChangeLog>

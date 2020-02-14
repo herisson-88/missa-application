@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="connaissance">
+            <h2><span>Connaissance</span> {{ connaissance.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Nom</span></dt>
+                <dd>
+                    <span>{{ connaissance.nom }}</span>
+                </dd>
+                <dt><span>Prenom</span></dt>
+                <dd>
+                    <span>{{ connaissance.prenom }}</span>
+                </dd>
+                <dt><span>Mail</span></dt>
+                <dd>
+                    <span>{{ connaissance.mail }}</span>
+                </dd>
+                <dt><span>Id Face Book</span></dt>
+                <dd>
+                    <span>{{ connaissance.idFaceBook }}</span>
+                </dd>
+                <dt><span>Parraine</span></dt>
+                <dd>
+                    <span>{{ connaissance.parraine }}</span>
+                </dd>
+                <dt><span>Connu Par</span></dt>
+                <dd>
+                    <div *ngIf="connaissance.connuParId">
+                        <a [routerLink]="['/missa-user', connaissance.connuParId, 'view']">{{ connaissance.connuParId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/connaissance', connaissance.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

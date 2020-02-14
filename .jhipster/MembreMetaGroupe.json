@@ -1,0 +1,74 @@
+{
+    "name": "MembreMetaGroupe",
+    "fields": [
+        {
+            "fieldName": "validated",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "dateValidation",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "admin",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "presentation",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "connaissance",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "mailingList",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "metaGroupe",
+            "otherEntityRelationshipName": "membres",
+            "relationshipName": "groupeMembre",
+            "otherEntityField": "nom"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "missaUser",
+            "otherEntityRelationshipName": "membreValides",
+            "relationshipName": "validePar",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "missaUser",
+            "otherEntityRelationshipName": "membres",
+            "relationshipName": "missaUser",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200214121000",
+    "entityTableName": "membre_meta_groupe",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}

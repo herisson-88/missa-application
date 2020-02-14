@@ -1,0 +1,125 @@
+<div>
+    <h2 id="page-heading">
+        <span>Meta Groupes</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-meta-groupe" [routerLink]="['/meta-groupe/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span class="hidden-sm-down">
+            Create a new Meta Groupe
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon icon="search"></fa-icon>
+                    </button>
+
+                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+                        <fa-icon icon="trash-alt"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="metaGroupes?.length === 0">
+        <span>No metaGroupes found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="metaGroupes?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nom"><span>Nom</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="autoriteValidation"><span>Autorite Validation</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="membreParent"><span>Membre Parent</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="visibilite"><span>Visibilite</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="droitEnvoiDeMail"><span>Droit Envoi De Mail</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="demandeDiffusionVerticale"><span>Demande Diffusion Verticale</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="messagerieModeree"><span>Messagerie Moderee</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="groupeFinal"><span>Groupe Final</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dateValidation"><span>Date Validation</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="detail"><span>Detail</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="parentNom"><span>Parent</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="typeId"><span>Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="reseauId"><span>Reseau</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let metaGroupe of metaGroupes ;trackBy: trackId">
+                    <td><a [routerLink]="['/meta-groupe', metaGroupe.id, 'view']">{{ metaGroupe.id }}</a></td>
+                    <td>{{ metaGroupe.nom }}</td>
+                    <td>{{ metaGroupe.autoriteValidation }}</td>
+                    <td>{{ metaGroupe.membreParent }}</td>
+                    <td>{{ metaGroupe.visibilite }}</td>
+                    <td>{{ metaGroupe.droitEnvoiDeMail }}</td>
+                    <td>{{ metaGroupe.demandeDiffusionVerticale }}</td>
+                    <td>{{ metaGroupe.messagerieModeree }}</td>
+                    <td>{{ metaGroupe.groupeFinal }}</td>
+                    <td>{{ metaGroupe.dateValidation | date:'medium' }}</td>
+                    <td>{{ metaGroupe.detail }}</td>
+                    <td>
+                        <div *ngIf="metaGroupe.parentId">
+                            <a [routerLink]="['/meta-groupe', metaGroupe.parentId , 'view']" >{{ metaGroupe.parentNom }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="metaGroupe.typeId">
+                            <a [routerLink]="['/type-meta-groupe', metaGroupe.typeId , 'view']" >{{ metaGroupe.typeId }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="metaGroupe.reseauId">
+                            <a [routerLink]="['/reseau', metaGroupe.reseauId , 'view']" >{{ metaGroupe.reseauId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/meta-groupe', metaGroupe.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/meta-groupe', metaGroupe.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(metaGroupe)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="metaGroupes?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

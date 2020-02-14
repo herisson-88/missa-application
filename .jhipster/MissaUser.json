@@ -1,0 +1,118 @@
+{
+    "name": "MissaUser",
+    "fields": [
+        {
+            "fieldName": "codePostal",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "20"
+        },
+        {
+            "fieldName": "initiales",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "20"
+        },
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "50"
+        },
+        {
+            "fieldName": "prenom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "50"
+        },
+        {
+            "fieldName": "mail",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "50"
+        },
+        {
+            "fieldName": "etat",
+            "fieldType": "EtatUser",
+            "fieldValues": "CREE,VALIDE,BLOQUE,SUPPRIME"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "missaUser",
+            "relationshipName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "connaissance",
+            "otherEntityRelationshipName": "connuPar",
+            "relationshipName": "connais"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "membreMetaGroupe",
+            "otherEntityRelationshipName": "validePar",
+            "relationshipName": "membreValides"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "membreMetaGroupe",
+            "otherEntityRelationshipName": "missaUser",
+            "relationshipName": "membres"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "messageMetaGroupe",
+            "otherEntityRelationshipName": "auteur",
+            "relationshipName": "messagesDeMoi"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "envoiDeMail",
+            "otherEntityRelationshipName": "admin",
+            "relationshipName": "mails"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "partageMetaGroupe",
+            "otherEntityRelationshipName": "auteurPartage",
+            "relationshipName": "demandesPartages"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "partageMetaGroupe",
+            "otherEntityRelationshipName": "validateurDuPartage",
+            "relationshipName": "aValidePartages"
+        }
+    ],
+    "changelogDate": "20200214121100",
+    "entityTableName": "missa_user",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}

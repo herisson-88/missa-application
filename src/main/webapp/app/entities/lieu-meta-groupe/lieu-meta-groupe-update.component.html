@@ -1,0 +1,116 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-lieu-meta-groupe-heading">Create or edit a Lieu Meta Groupe</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nom">Nom</label>
+                    <input type="text" class="form-control" name="nom" id="field_nom"
+                           formControlName="nom"/>
+                    <div *ngIf="editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nom')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nom')?.errors?.maxlength">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_adresse">Adresse</label>
+                    <input type="text" class="form-control" name="adresse" id="field_adresse"
+                           formControlName="adresse"/>
+                    <div *ngIf="editForm.get('adresse')!.invalid && (editForm.get('adresse')!.dirty || editForm.get('adresse')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('adresse')?.errors?.maxlength">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_codePostal">Code Postal</label>
+                    <input type="text" class="form-control" name="codePostal" id="field_codePostal"
+                           formControlName="codePostal"/>
+                    <div *ngIf="editForm.get('codePostal')!.invalid && (editForm.get('codePostal')!.dirty || editForm.get('codePostal')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codePostal')?.errors?.maxlength">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_ville">Ville</label>
+                    <input type="text" class="form-control" name="ville" id="field_ville"
+                           formControlName="ville"/>
+                    <div *ngIf="editForm.get('ville')!.invalid && (editForm.get('ville')!.dirty || editForm.get('ville')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('ville')?.errors?.maxlength">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_lat">Lat</label>
+                    <input type="number" class="form-control" name="lat" id="field_lat"
+                           formControlName="lat"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_lon">Lon</label>
+                    <input type="number" class="form-control" name="lon" id="field_lon"
+                           formControlName="lon"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_detail">Detail</label>
+                    <textarea class="form-control" name="detail" id="field_detail"
+                              formControlName="detail"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_departementGroupe">Departement Groupe</label>
+                    <input type="text" class="form-control" name="departementGroupe" id="field_departementGroupe"
+                           formControlName="departementGroupe"/>
+                    <div *ngIf="editForm.get('departementGroupe')!.invalid && (editForm.get('departementGroupe')!.dirty || editForm.get('departementGroupe')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('departementGroupe')?.errors?.maxlength">
+                        This field cannot be longer than 10 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_groupe">Groupe</label>
+                    <select class="form-control" id="field_groupe" name="groupe" formControlName="groupeId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="metaGroupeOption.id" *ngFor="let metaGroupeOption of metagroupes; trackBy: trackById">{{ metaGroupeOption.nom }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

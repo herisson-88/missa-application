@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="lienDocMetaGroupe">
+            <h2><span>Lien Doc Meta Groupe</span> {{ lienDocMetaGroupe.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Nom</span></dt>
+                <dd>
+                    <span>{{ lienDocMetaGroupe.nom }}</span>
+                </dd>
+                <dt><span>Type Du Doc</span></dt>
+                <dd>
+                    <span>{{ lienDocMetaGroupe.typeDuDoc }}</span>
+                </dd>
+                <dt><span>Icone</span></dt>
+                <dd>
+                    <div *ngIf="lienDocMetaGroupe.icone">
+                        <a (click)="openFile(lienDocMetaGroupe.iconeContentType!, lienDocMetaGroupe.icone)">
+                            <img [src]="'data:' + lienDocMetaGroupe.iconeContentType + ';base64,' + lienDocMetaGroupe.icone" style="max-width: 100%;" alt="lienDocMetaGroupe image"/>
+                        </a>
+                        {{ lienDocMetaGroupe.iconeContentType }}, {{ byteSize(lienDocMetaGroupe.icone) }}
+                    </div>
+                </dd>
+                <dt><span>Image</span></dt>
+                <dd>
+                    <div *ngIf="lienDocMetaGroupe.image">
+                        <a (click)="openFile(lienDocMetaGroupe.imageContentType!, lienDocMetaGroupe.image)">
+                            <img [src]="'data:' + lienDocMetaGroupe.imageContentType + ';base64,' + lienDocMetaGroupe.image" style="max-width: 100%;" alt="lienDocMetaGroupe image"/>
+                        </a>
+                        {{ lienDocMetaGroupe.imageContentType }}, {{ byteSize(lienDocMetaGroupe.image) }}
+                    </div>
+                </dd>
+                <dt><span>Doc</span></dt>
+                <dd>
+                    <div *ngIf="lienDocMetaGroupe.doc">
+                        <a (click)="openFile(lienDocMetaGroupe.docContentType!, lienDocMetaGroupe.doc)">open</a>
+                        {{ lienDocMetaGroupe.docContentType }}, {{ byteSize(lienDocMetaGroupe.doc) }}
+                    </div>
+                </dd>
+                <dt><span>Detail</span></dt>
+                <dd>
+                    <span>{{ lienDocMetaGroupe.detail }}</span>
+                </dd>
+                <dt><span>Groupe</span></dt>
+                <dd>
+                    <div *ngIf="lienDocMetaGroupe.groupeId">
+                        <a [routerLink]="['/meta-groupe', lienDocMetaGroupe.groupeId, 'view']">{{ lienDocMetaGroupe.groupeNom }}</a>
+                    </div>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <div *ngIf="lienDocMetaGroupe.typeId">
+                        <a [routerLink]="['/type-meta-groupe', lienDocMetaGroupe.typeId, 'view']">{{ lienDocMetaGroupe.typeTypeDuGroupe }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/lien-doc-meta-groupe', lienDocMetaGroupe.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

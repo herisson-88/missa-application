@@ -1,0 +1,154 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-lien-doc-meta-groupe-heading">Create or edit a Lien Doc Meta Groupe</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nom">Nom</label>
+                    <input type="text" class="form-control" name="nom" id="field_nom"
+                           formControlName="nom"/>
+                    <div *ngIf="editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nom')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nom')?.errors?.maxlength">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_typeDuDoc">Type Du Doc</label>
+                    <select class="form-control" name="typeDuDoc" formControlName="typeDuDoc" id="field_typeDuDoc">
+                        <option value="DOC">DOC</option>
+                        <option value="IMAGE">IMAGE</option>
+                        <option value="BANDEAU">BANDEAU</option>
+                        <option value="FOND">FOND</option>
+                        <option value="ICONE">ICONE</option>
+                    </select>
+                    <div *ngIf="editForm.get('typeDuDoc')!.invalid && (editForm.get('typeDuDoc')!.dirty || editForm.get('typeDuDoc')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('typeDuDoc')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_icone">Icone</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('iconeContentType')!.value + ';base64,' + editForm.get('icone')!.value" style="max-height: 100px;" *ngIf="editForm.get('icone')!.value" alt="lienDocMetaGroupe image"/>
+                        <div *ngIf="editForm.get('icone')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('iconeContentType')!.value }}, {{ byteSize(editForm.get('icone')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('icone', 'iconeContentType', 'file_icone')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_icone" (change)="setFileData($event, 'icone', true)" accept="image/*"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="icone" id="field_icone"
+                           formControlName="icone"/>
+                    <input type="hidden" class="form-control" name="iconeContentType" id="field_iconeContentType"
+                           formControlName="iconeContentType" />
+                    <div *ngIf="editForm.get('icone')!.invalid && (editForm.get('icone')!.dirty || editForm.get('icone')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('icone')?.errors?.maxbytes">
+                            This field cannot be more than 100000.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_image">Image</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('imageContentType')!.value + ';base64,' + editForm.get('image')!.value" style="max-height: 100px;" *ngIf="editForm.get('image')!.value" alt="lienDocMetaGroupe image"/>
+                        <div *ngIf="editForm.get('image')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('imageContentType')!.value }}, {{ byteSize(editForm.get('image')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('image', 'imageContentType', 'file_image')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_image" (change)="setFileData($event, 'image', true)" accept="image/*"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="image" id="field_image"
+                           formControlName="image"/>
+                    <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                           formControlName="imageContentType" />
+                    <div *ngIf="editForm.get('image')!.invalid && (editForm.get('image')!.dirty || editForm.get('image')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('image')?.errors?.maxbytes">
+                            This field cannot be more than 5000000.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_doc">Doc</label>
+                    <div>
+                        <div *ngIf="editForm.get('doc')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('docContentType')!.value, editForm.get('doc')!.value)">open</a><br>
+                            <span class="pull-left">{{ editForm.get('docContentType')!.value }}, {{ byteSize(editForm.get('doc')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({doc: null});editForm.patchValue({docContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_doc" (change)="setFileData($event, 'doc', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="doc" id="field_doc"
+                           formControlName="doc"/>
+                    <input type="hidden" class="form-control" name="docContentType" id="field_docContentType"
+                           formControlName="docContentType" />
+                    <div *ngIf="editForm.get('doc')!.invalid && (editForm.get('doc')!.dirty || editForm.get('doc')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('doc')?.errors?.maxbytes">
+                            This field cannot be more than 5000000.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_detail">Detail</label>
+                    <textarea class="form-control" name="detail" id="field_detail"
+                              formControlName="detail"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_groupe">Groupe</label>
+                    <select class="form-control" id="field_groupe" name="groupe" formControlName="groupeId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="metaGroupeOption.id" *ngFor="let metaGroupeOption of metagroupes; trackBy: trackById">{{ metaGroupeOption.nom }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_type">Type</label>
+                    <select class="form-control" id="field_type" name="type" formControlName="typeId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="typeMetaGroupeOption.id" *ngFor="let typeMetaGroupeOption of typemetagroupes; trackBy: trackById">{{ typeMetaGroupeOption.typeDuGroupe }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

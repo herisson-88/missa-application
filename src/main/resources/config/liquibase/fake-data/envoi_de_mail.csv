@@ -1,0 +1,11 @@
+id;date_envoi;titre;adresse_mail;mot_spirituel;conseil_technique;nb_destinataire;sended
+1;2020-02-13T12:47:50;process improvement;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;93792;false
+2;2020-02-13T22:45:07;open-source;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;32486;false
+3;2020-02-14T10:37:37;frame Keyboard;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;98980;true
+4;2020-02-13T12:12:45;Agent;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;74307;true
+5;2020-02-13T14:51:57;Ohio lime;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;29629;true
+6;2020-02-13T12:31:54;Integration THX Gorgeous Cotton Computer;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;68874;false
+7;2020-02-14T06:57:25;Utah;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;80151;true
+8;2020-02-13T22:07:53;green Awesome back-end;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;98561;true
+9;2020-02-14T00:54:41;deposit;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;88957;true
+10;2020-02-14T07:20:35;US Dollar Berkshire index;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;76037;false
