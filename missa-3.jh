@@ -1,0 +1,195 @@
+entity Reseau {
+	nom String
+}
+
+entity TypeMetaGroupe {
+	typeDuGroupe String required maxlength(100)
+    iconeFa String maxlength(200)
+    detail TextBlob
+    ordreMail Integer
+}
+
+entity Connaissance {
+	nom String maxlength(100)
+    prenom String maxlength(100)
+	mail String maxlength(100)
+    idFaceBook String maxlength(200)
+    parraine Boolean
+}
+
+enum Visibilite {
+	//Peut être trouvé par n'importe qui
+    EXISTENCE_PUBLIC, 
+    //Contenu visible par n'importe qui
+    VISIBILITE_PUBLIC,
+    //Visible par les membres des parents
+    PRIVE
+}
+
+enum MembreDiffusion {
+	//les membres du groupe sont alors membre du parent/partage
+    DIFFUSION_UP, 
+    //les membres du groupe sont ceux du parent (liste unique)
+    DIFFUSION_ALL,
+    //membres autonomes
+    NO_DIFFUSION
+}
+
+entity MetaGroupe {
+	nom String required maxlength(100)
+    autoriteValidation Boolean
+    membreParent MembreDiffusion
+    visibilite Visibilite
+    //Peut envoyer un mail aux membres
+    droitEnvoiDeMail Boolean
+    //vers les parents du parent ou vers les partages du parent
+    demandeDiffusionVerticale Boolean
+    messagerieModeree Boolean
+    //n'aura pas de fils
+    groupeFinal Boolean
+    dateValidation ZonedDateTime
+    detail TextBlob
+}
+
+entity PartageMetaGroupe {
+	validated Boolean
+    dateValidation ZonedDateTime
+    detail TextBlob
+}
+
+entity EnvoiDeMail {
+	dateEnvoi ZonedDateTime required
+    titre String required maxlength(200)
+	adresseMail TextBlob required
+    motSpirituel TextBlob
+    conseilTechnique TextBlob
+    nbDestinataire Integer required
+    sended Boolean
+}
+
+enum TypeDoc {
+    DOC, IMAGE, BANDEAU, FOND, ICONE
+}
+
+entity LienDocMetaGroupe {
+	nom String required maxlength(100)
+    typeDuDoc TypeDoc required 
+    icone ImageBlob maxbytes(100000)
+    image ImageBlob maxbytes(5000000)
+    doc Blob maxbytes(5000000)
+    detail TextBlob
+}
+
+entity LieuMetaGroupe {
+    nom String required maxlength(100)
+	adresse String maxlength(100)
+	codePostal String maxlength(100)
+	ville String maxlength(100)
+    //coordonnées Geoloc
+	lat Double
+    lon Double
+    detail TextBlob
+    departementGroupe String maxlength(10)
+}
+
+entity MessageMetaGroupe {
+	titre String maxlength(100)
+    publique Boolean
+    message TextBlob required
+}
+
+enum Day {
+    DIMANCHE, LUNDI, MARDI, MERCREDI, JEUDI, VENDREDI, SAMEDI
+}
+
+entity DateMetaGroupe {
+	dateDebut ZonedDateTime
+    dateFin ZonedDateTime
+    every Day
+    hour Integer
+    minutes Integer
+    detail TextBlob
+}
+
+entity MembreMetaGroupe {
+	validated Boolean
+    dateValidation ZonedDateTime
+    admin Boolean
+    presentation TextBlob required
+    connaissance TextBlob required
+    mailingList Boolean required
+}
+
+enum EtatUser {
+    CREE, VALIDE, BLOQUE, SUPPRIME
+}
+
+entity MissaUser {
+	codePostal String required maxlength(20)
+    initiales String required maxlength(20)
+    nom String required maxlength(50)
+    prenom String required maxlength(50)
+    mail String required maxlength(50)
+    etat EtatUser
+}
+
+entity OrganisateurMetaGroupe {
+	site String maxlength(200)
+    nom String maxlength(100)
+    prenom String maxlength(100)
+    telephone String maxlength(20)
+    mail String maxlength(100)
+    adresse String maxlength(100)
+	codePostal String maxlength(20)
+	ville String maxlength(100)
+    detail TextBlob
+}
+
+filter *
+
+relationship ManyToMany {
+	EnvoiDeMail{groupePartageParMail} to MetaGroupe{messageMailReferent}
+}
+
+relationship OneToMany {
+    MetaGroupe{membres} to MembreMetaGroupe{groupeMembre(nom)}
+    MetaGroupe{dates} to DateMetaGroupe{groupe(nom)}
+    MetaGroupe{lieu(nom)} to LieuMetaGroupe{groupe(nom)}
+    MetaGroupe{docs} to LienDocMetaGroupe{groupe(nom)}
+    TypeMetaGroupe{defaultDocs} to LienDocMetaGroupe{type(typeDuGroupe)}
+    MetaGroupe{coordonneesOrganisateurs} to OrganisateurMetaGroupe{groupe(nom)}
+    MetaGroupe{sousGroupes(nom)} to MetaGroupe{parent(nom)}
+    MissaUser{connais} to Connaissance{connuPar}
+    MissaUser{membreValides} to MembreMetaGroupe{validePar}
+    MissaUser{membres} to MembreMetaGroupe{missaUser}
+    TypeMetaGroupe{groupes(typeDuGroupe)} to MetaGroupe{type}
+    Reseau{groupes(typeDuGroupe)} to MetaGroupe{reseau}
+    Reseau{types} to TypeMetaGroupe{reseau}
+    MissaUser{messagesDeMoi} to MessageMetaGroupe{auteur}
+    MetaGroupe{messagesDuGroupe} to MessageMetaGroupe{groupe(nom)}
+    MissaUser{mails} to EnvoiDeMail{admin}
+    MetaGroupe{mails} to EnvoiDeMail{groupeDuMail(nom)}
+    MetaGroupe{partagesVers} to PartageMetaGroupe{metaGroupePartage(nom)}
+    MetaGroupe{partagesRecus} to PartageMetaGroupe{metaGroupeDestinataires(nom)}
+    MissaUser{demandesPartages} to PartageMetaGroupe{auteurPartage}
+    MissaUser{aValidePartages} to PartageMetaGroupe{validateurDuPartage}
+}
+
+relationship OneToOne {
+    MissaUser{user} to User
+}
+
+// Set pagination options
+paginate MessageMetaGroupe with infinite-scroll
+paginate MembreMetaGroupe with pagination
+paginate MetaGroupe with pagination
+paginate MissaUser with infinite-scroll
+paginate EnvoiDeMail with pagination
+paginate PartageMetaGroupe with pagination
+paginate LienDocMetaGroupe with pagination
+
+search * with elasticsearch
+
+dto * with mapstruct
+
+service all with serviceClass

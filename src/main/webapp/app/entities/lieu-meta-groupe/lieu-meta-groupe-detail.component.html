@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="lieuMetaGroupe">
+            <h2><span>Lieu Meta Groupe</span> {{ lieuMetaGroupe.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Nom</span></dt>
+                <dd>
+                    <span>{{ lieuMetaGroupe.nom }}</span>
+                </dd>
+                <dt><span>Adresse</span></dt>
+                <dd>
+                    <span>{{ lieuMetaGroupe.adresse }}</span>
+                </dd>
+                <dt><span>Code Postal</span></dt>
+                <dd>
+                    <span>{{ lieuMetaGroupe.codePostal }}</span>
+                </dd>
+                <dt><span>Ville</span></dt>
+                <dd>
+                    <span>{{ lieuMetaGroupe.ville }}</span>
+                </dd>
+                <dt><span>Lat</span></dt>
+                <dd>
+                    <span>{{ lieuMetaGroupe.lat }}</span>
+                </dd>
+                <dt><span>Lon</span></dt>
+                <dd>
+                    <span>{{ lieuMetaGroupe.lon }}</span>
+                </dd>
+                <dt><span>Detail</span></dt>
+                <dd>
+                    <span>{{ lieuMetaGroupe.detail }}</span>
+                </dd>
+                <dt><span>Departement Groupe</span></dt>
+                <dd>
+                    <span>{{ lieuMetaGroupe.departementGroupe }}</span>
+                </dd>
+                <dt><span>Groupe</span></dt>
+                <dd>
+                    <div *ngIf="lieuMetaGroupe.groupeId">
+                        <a [routerLink]="['/meta-groupe', lieuMetaGroupe.groupeId, 'view']">{{ lieuMetaGroupe.groupeNom }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/lieu-meta-groupe', lieuMetaGroupe.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

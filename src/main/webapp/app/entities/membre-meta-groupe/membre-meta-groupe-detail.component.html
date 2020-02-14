@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="membreMetaGroupe">
+            <h2><span>Membre Meta Groupe</span> {{ membreMetaGroupe.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Validated</span></dt>
+                <dd>
+                    <span>{{ membreMetaGroupe.validated }}</span>
+                </dd>
+                <dt><span>Date Validation</span></dt>
+                <dd>
+                    <span>{{ membreMetaGroupe.dateValidation }}</span>
+                </dd>
+                <dt><span>Admin</span></dt>
+                <dd>
+                    <span>{{ membreMetaGroupe.admin }}</span>
+                </dd>
+                <dt><span>Presentation</span></dt>
+                <dd>
+                    <span>{{ membreMetaGroupe.presentation }}</span>
+                </dd>
+                <dt><span>Connaissance</span></dt>
+                <dd>
+                    <span>{{ membreMetaGroupe.connaissance }}</span>
+                </dd>
+                <dt><span>Mailing List</span></dt>
+                <dd>
+                    <span>{{ membreMetaGroupe.mailingList }}</span>
+                </dd>
+                <dt><span>Groupe Membre</span></dt>
+                <dd>
+                    <div *ngIf="membreMetaGroupe.groupeMembreId">
+                        <a [routerLink]="['/meta-groupe', membreMetaGroupe.groupeMembreId, 'view']">{{ membreMetaGroupe.groupeMembreNom }}</a>
+                    </div>
+                </dd>
+                <dt><span>Valide Par</span></dt>
+                <dd>
+                    <div *ngIf="membreMetaGroupe.valideParId">
+                        <a [routerLink]="['/missa-user', membreMetaGroupe.valideParId, 'view']">{{ membreMetaGroupe.valideParId }}</a>
+                    </div>
+                </dd>
+                <dt><span>Missa User</span></dt>
+                <dd>
+                    <div *ngIf="membreMetaGroupe.missaUserId">
+                        <a [routerLink]="['/missa-user', membreMetaGroupe.missaUserId, 'view']">{{ membreMetaGroupe.missaUserId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/membre-meta-groupe', membreMetaGroupe.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

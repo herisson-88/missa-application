@@ -1,0 +1,59 @@
+{
+    "name": "PartageMetaGroupe",
+    "fields": [
+        {
+            "fieldName": "validated",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "dateValidation",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "detail",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "metaGroupe",
+            "otherEntityRelationshipName": "partagesVers",
+            "relationshipName": "metaGroupePartage",
+            "otherEntityField": "nom"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "metaGroupe",
+            "otherEntityRelationshipName": "partagesRecus",
+            "relationshipName": "metaGroupeDestinataires",
+            "otherEntityField": "nom"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "missaUser",
+            "otherEntityRelationshipName": "demandesPartages",
+            "relationshipName": "auteurPartage",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "missaUser",
+            "otherEntityRelationshipName": "aValidePartages",
+            "relationshipName": "validateurDuPartage",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200214120400",
+    "entityTableName": "partage_meta_groupe",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}

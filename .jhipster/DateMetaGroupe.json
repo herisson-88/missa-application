@@ -1,0 +1,51 @@
+{
+    "name": "DateMetaGroupe",
+    "fields": [
+        {
+            "fieldName": "dateDebut",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "dateFin",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "every",
+            "fieldType": "Day",
+            "fieldValues": "DIMANCHE,LUNDI,MARDI,MERCREDI,JEUDI,VENDREDI,SAMEDI"
+        },
+        {
+            "fieldName": "hour",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "minutes",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "detail",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "metaGroupe",
+            "otherEntityRelationshipName": "dates",
+            "relationshipName": "groupe",
+            "otherEntityField": "nom"
+        }
+    ],
+    "changelogDate": "20200214120900",
+    "entityTableName": "date_meta_groupe",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}

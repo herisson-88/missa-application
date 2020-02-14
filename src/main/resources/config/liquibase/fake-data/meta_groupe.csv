@@ -1,0 +1,11 @@
+id;nom;autorite_validation;membre_parent;visibilite;droit_envoi_de_mail;demande_diffusion_verticale;messagerie_moderee;groupe_final;date_validation;detail
+1;Keyboard;false;DIFFUSION_ALL;PRIVE;false;true;false;true;2020-02-13T17:45:55;../fake-data/blob/hipster.txt
+2;neural;false;DIFFUSION_UP;VISIBILITE_PUBLIC;true;true;false;true;2020-02-14T06:34:01;../fake-data/blob/hipster.txt
+3;Metal open-source Guinea Franc;true;DIFFUSION_UP;EXISTENCE_PUBLIC;true;true;false;true;2020-02-13T12:49:43;../fake-data/blob/hipster.txt
+4;Plastic Fantastic Fresh Car Armenia;false;DIFFUSION_ALL;VISIBILITE_PUBLIC;true;false;true;true;2020-02-13T18:28:26;../fake-data/blob/hipster.txt
+5;Customer Open-architected;true;DIFFUSION_ALL;PRIVE;false;false;true;true;2020-02-14T02:20:31;../fake-data/blob/hipster.txt
+6;Checking Account withdrawal;false;DIFFUSION_UP;EXISTENCE_PUBLIC;true;false;true;false;2020-02-14T07:49:08;../fake-data/blob/hipster.txt
+7;synthesize;true;NO_DIFFUSION;PRIVE;true;true;true;false;2020-02-14T04:54:08;../fake-data/blob/hipster.txt
+8;AI Books Focused;true;NO_DIFFUSION;EXISTENCE_PUBLIC;true;true;true;true;2020-02-13T20:50:00;../fake-data/blob/hipster.txt
+9;functionalities Personal Loan Account;true;DIFFUSION_ALL;VISIBILITE_PUBLIC;false;false;false;false;2020-02-13T17:17:49;../fake-data/blob/hipster.txt
+10;Small Metal Ball;false;DIFFUSION_UP;PRIVE;false;false;true;false;2020-02-13T22:50:22;../fake-data/blob/hipster.txt

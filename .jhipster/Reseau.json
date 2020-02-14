@@ -1,0 +1,34 @@
+{
+    "name": "Reseau",
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "metaGroupe",
+            "otherEntityRelationshipName": "reseau",
+            "relationshipName": "groupes"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "typeMetaGroupe",
+            "otherEntityRelationshipName": "reseau",
+            "relationshipName": "types"
+        }
+    ],
+    "changelogDate": "20200214120000",
+    "entityTableName": "reseau",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}

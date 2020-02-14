@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity EnvoiDeMail.
+    -->
+    <changeSet id="20200214120500-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="envoi_de_mail_id"
+                                 baseTableName="envoi_de_mail_groupe_partage_par_mail"
+                                 constraintName="fk_envoi_de_mail_groupe_partage_par_mail_envoi_de_mail_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="envoi_de_mail"/>
+
+        <addForeignKeyConstraint baseColumnNames="groupe_partage_par_mail_id"
+                                 baseTableName="envoi_de_mail_groupe_partage_par_mail"
+                                 constraintName="envoi_de_mail_groupe_partage_p_groupe_partage_par_mail_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meta_groupe"/>
+        
+        <addForeignKeyConstraint baseColumnNames="admin_id"
+                                 baseTableName="envoi_de_mail"
+                                 constraintName="fk_envoi_de_mail_admin_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="missa_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="groupe_du_mail_id"
+                                 baseTableName="envoi_de_mail"
+                                 constraintName="fk_envoi_de_mail_groupe_du_mail_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meta_groupe"/>
+
+    </changeSet>
+</databaseChangeLog>

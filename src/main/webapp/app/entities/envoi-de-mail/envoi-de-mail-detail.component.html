@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="envoiDeMail">
+            <h2><span>Envoi De Mail</span> {{ envoiDeMail.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Date Envoi</span></dt>
+                <dd>
+                    <span>{{ envoiDeMail.dateEnvoi }}</span>
+                </dd>
+                <dt><span>Titre</span></dt>
+                <dd>
+                    <span>{{ envoiDeMail.titre }}</span>
+                </dd>
+                <dt><span>Adresse Mail</span></dt>
+                <dd>
+                    <span>{{ envoiDeMail.adresseMail }}</span>
+                </dd>
+                <dt><span>Mot Spirituel</span></dt>
+                <dd>
+                    <span>{{ envoiDeMail.motSpirituel }}</span>
+                </dd>
+                <dt><span>Conseil Technique</span></dt>
+                <dd>
+                    <span>{{ envoiDeMail.conseilTechnique }}</span>
+                </dd>
+                <dt><span>Nb Destinataire</span></dt>
+                <dd>
+                    <span>{{ envoiDeMail.nbDestinataire }}</span>
+                </dd>
+                <dt><span>Sended</span></dt>
+                <dd>
+                    <span>{{ envoiDeMail.sended }}</span>
+                </dd>
+                <dt><span>Groupe Partage Par Mail</span></dt>
+                <dd>
+                    <span *ngFor="let groupePartageParMail of envoiDeMail.groupePartageParMails; let last = last">
+                        <a [routerLink]="['/meta-groupe', groupePartageParMail?.id, 'view']">{{ groupePartageParMail.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                <dt><span>Admin</span></dt>
+                <dd>
+                    <div *ngIf="envoiDeMail.adminId">
+                        <a [routerLink]="['/missa-user', envoiDeMail.adminId, 'view']">{{ envoiDeMail.adminId }}</a>
+                    </div>
+                </dd>
+                <dt><span>Groupe Du Mail</span></dt>
+                <dd>
+                    <div *ngIf="envoiDeMail.groupeDuMailId">
+                        <a [routerLink]="['/meta-groupe', envoiDeMail.groupeDuMailId, 'view']">{{ envoiDeMail.groupeDuMailNom }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/envoi-de-mail', envoiDeMail.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

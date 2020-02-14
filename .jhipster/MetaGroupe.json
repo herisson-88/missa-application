@@ -1,0 +1,155 @@
+{
+    "name": "MetaGroupe",
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "100"
+        },
+        {
+            "fieldName": "autoriteValidation",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "membreParent",
+            "fieldType": "MembreDiffusion",
+            "fieldValues": "DIFFUSION_UP,DIFFUSION_ALL,NO_DIFFUSION"
+        },
+        {
+            "fieldName": "visibilite",
+            "fieldType": "Visibilite",
+            "fieldValues": "EXISTENCE_PUBLIC,VISIBILITE_PUBLIC,PRIVE"
+        },
+        {
+            "fieldName": "droitEnvoiDeMail",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "demandeDiffusionVerticale",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "messagerieModeree",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "groupeFinal",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "dateValidation",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "detail",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "membreMetaGroupe",
+            "otherEntityRelationshipName": "groupeMembre",
+            "relationshipName": "membres"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "dateMetaGroupe",
+            "otherEntityRelationshipName": "groupe",
+            "relationshipName": "dates"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "lieuMetaGroupe",
+            "otherEntityRelationshipName": "groupe",
+            "relationshipName": "lieu"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "lienDocMetaGroupe",
+            "otherEntityRelationshipName": "groupe",
+            "relationshipName": "docs"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "organisateurMetaGroupe",
+            "otherEntityRelationshipName": "groupe",
+            "relationshipName": "coordonneesOrganisateurs"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "metaGroupe",
+            "otherEntityRelationshipName": "parent",
+            "relationshipName": "sousGroupes"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "messageMetaGroupe",
+            "otherEntityRelationshipName": "groupe",
+            "relationshipName": "messagesDuGroupe"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "envoiDeMail",
+            "otherEntityRelationshipName": "groupeDuMail",
+            "relationshipName": "mails"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "partageMetaGroupe",
+            "otherEntityRelationshipName": "metaGroupePartage",
+            "relationshipName": "partagesVers"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "partageMetaGroupe",
+            "otherEntityRelationshipName": "metaGroupeDestinataires",
+            "relationshipName": "partagesRecus"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "metaGroupe",
+            "otherEntityRelationshipName": "sousGroupes",
+            "relationshipName": "parent",
+            "otherEntityField": "nom"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "typeMetaGroupe",
+            "otherEntityRelationshipName": "groupes",
+            "relationshipName": "type",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "reseau",
+            "otherEntityRelationshipName": "groupes",
+            "relationshipName": "reseau",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "envoiDeMail",
+            "otherEntityRelationshipName": "groupePartageParMail",
+            "relationshipName": "messageMailReferent",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200214120300",
+    "entityTableName": "meta_groupe",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}

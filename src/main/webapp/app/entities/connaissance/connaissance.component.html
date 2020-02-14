@@ -1,0 +1,93 @@
+<div>
+    <h2 id="page-heading">
+        <span>Connaissances</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-connaissance" [routerLink]="['/connaissance/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span class="hidden-sm-down">
+            Create a new Connaissance
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon icon="search"></fa-icon>
+                    </button>
+
+                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+                        <fa-icon icon="trash-alt"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="connaissances?.length === 0">
+        <span>No connaissances found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="connaissances?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Nom</span></th>
+                    <th scope="col" ><span>Prenom</span></th>
+                    <th scope="col" ><span>Mail</span></th>
+                    <th scope="col" ><span>Id Face Book</span></th>
+                    <th scope="col" ><span>Parraine</span></th>
+                    <th scope="col" ><span>Connu Par</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let connaissance of connaissances ;trackBy: trackId">
+                    <td><a [routerLink]="['/connaissance', connaissance.id, 'view']">{{ connaissance.id }}</a></td>
+                    <td>{{ connaissance.nom }}</td>
+                    <td>{{ connaissance.prenom }}</td>
+                    <td>{{ connaissance.mail }}</td>
+                    <td>{{ connaissance.idFaceBook }}</td>
+                    <td>{{ connaissance.parraine }}</td>
+                    <td>
+                        <div *ngIf="connaissance.connuParId">
+                            <a [routerLink]="['/missa-user', connaissance.connuParId , 'view']" >{{ connaissance.connuParId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/connaissance', connaissance.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/connaissance', connaissance.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(connaissance)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="metaGroupe">
+            <h2><span>Meta Groupe</span> {{ metaGroupe.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Nom</span></dt>
+                <dd>
+                    <span>{{ metaGroupe.nom }}</span>
+                </dd>
+                <dt><span>Autorite Validation</span></dt>
+                <dd>
+                    <span>{{ metaGroupe.autoriteValidation }}</span>
+                </dd>
+                <dt><span>Membre Parent</span></dt>
+                <dd>
+                    <span>{{ metaGroupe.membreParent }}</span>
+                </dd>
+                <dt><span>Visibilite</span></dt>
+                <dd>
+                    <span>{{ metaGroupe.visibilite }}</span>
+                </dd>
+                <dt><span>Droit Envoi De Mail</span></dt>
+                <dd>
+                    <span>{{ metaGroupe.droitEnvoiDeMail }}</span>
+                </dd>
+                <dt><span>Demande Diffusion Verticale</span></dt>
+                <dd>
+                    <span>{{ metaGroupe.demandeDiffusionVerticale }}</span>
+                </dd>
+                <dt><span>Messagerie Moderee</span></dt>
+                <dd>
+                    <span>{{ metaGroupe.messagerieModeree }}</span>
+                </dd>
+                <dt><span>Groupe Final</span></dt>
+                <dd>
+                    <span>{{ metaGroupe.groupeFinal }}</span>
+                </dd>
+                <dt><span>Date Validation</span></dt>
+                <dd>
+                    <span>{{ metaGroupe.dateValidation }}</span>
+                </dd>
+                <dt><span>Detail</span></dt>
+                <dd>
+                    <span>{{ metaGroupe.detail }}</span>
+                </dd>
+                <dt><span>Parent</span></dt>
+                <dd>
+                    <div *ngIf="metaGroupe.parentId">
+                        <a [routerLink]="['/meta-groupe', metaGroupe.parentId, 'view']">{{ metaGroupe.parentNom }}</a>
+                    </div>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <div *ngIf="metaGroupe.typeId">
+                        <a [routerLink]="['/type-meta-groupe', metaGroupe.typeId, 'view']">{{ metaGroupe.typeId }}</a>
+                    </div>
+                </dd>
+                <dt><span>Reseau</span></dt>
+                <dd>
+                    <div *ngIf="metaGroupe.reseauId">
+                        <a [routerLink]="['/reseau', metaGroupe.reseauId, 'view']">{{ metaGroupe.reseauId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/meta-groupe', metaGroupe.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
