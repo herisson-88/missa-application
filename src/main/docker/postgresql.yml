@@ -1,0 +1,11 @@
+version: '2'
+services:
+  missa-postgresql:
+    image: postgres:12.1
+    # volumes:
+    #     - ~/volumes/jhipster/Missa/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=Missa
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432
